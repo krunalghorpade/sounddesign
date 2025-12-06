@@ -446,12 +446,17 @@ function renderTaskList() {
             `;
         }
 
+        const isLocked = !isCompleted && !isCurrent;
+        const titleDisplay = isLocked
+            ? `Day ${challenge.id}: <span style="filter: blur(4px); opacity: 0.6; user-select: none;">${challenge.title}</span>`
+            : `Day ${challenge.id}: ${challenge.title}`;
+
         taskDiv.innerHTML = `
-            <div style="display:flex; justify-content:space-between;">
-                <span style="font-weight: 700;">Day ${challenge.id}: ${challenge.title}</span>
-                <span style="font-size: 12px; color: ${statusColor}; font-weight: 600;">${statusText}</span>
+            <div style="display:flex; justify-content:space-between; align-items: flex-start;">
+                <span style="font-weight: 700;">${titleDisplay}</span>
+                <span style="font-size: 12px; color: ${statusColor}; font-weight: 600; white-space: nowrap; margin-left: 10px;">${statusText}</span>
             </div>
-            <div style="font-size: 12px; color: var(--color-text-muted);">${challenge.plugin}</div>
+            <div style="font-size: 12px; color: var(--color-text-muted); margin-top: 4px;">${challenge.plugin}</div>
             ${reflectionHtml}
         `;
 
@@ -541,6 +546,9 @@ async function initApp() {
 
     // 3. Render
     updateDashboardView();
+
+    // 4. Onboarding
+    if (typeof initOnboarding === 'function') initOnboarding();
 }
 
 // --- EVENT HANDLERS ---
@@ -700,6 +708,77 @@ closeBtns.forEach(btn => {
         if (modal) modal.style.display = 'none';
     });
 });
+
+// --- Onboarding Logic ---
+const onboardingModal = document.getElementById('onboarding-modal');
+const onboardingSteps = document.querySelectorAll('.onboarding-step');
+const stepDots = document.querySelectorAll('.step-dot');
+const onboardingNextBtn = document.getElementById('onboarding-next-btn');
+const onboardingSkipBtn = document.getElementById('onboarding-skip-btn');
+const dontShowCheckbox = document.getElementById('dont-show-onboarding');
+
+let currentStep = 1;
+const totalSteps = 3;
+
+function initOnboarding() {
+    if (localStorage.getItem('hideOnboarding') === 'true') {
+        return;
+    }
+    // Show Modal
+    if (onboardingModal) onboardingModal.style.display = 'flex';
+    updateOnboardingStep();
+}
+
+function updateOnboardingStep() {
+    // Show/Hide Steps
+    onboardingSteps.forEach(step => {
+        if (step.dataset.step == currentStep) {
+            step.classList.add('active');
+        } else {
+            step.classList.remove('active');
+        }
+    });
+
+    // Update Dots
+    stepDots.forEach(dot => {
+        if (dot.dataset.dot == currentStep) {
+            dot.classList.add('active');
+        } else {
+            dot.classList.remove('active');
+        }
+    });
+
+    // Update Button Text
+    if (currentStep === totalSteps) {
+        onboardingNextBtn.textContent = "Let's Go!";
+        onboardingNextBtn.classList.add('btn-success'); // Optional visual cue
+    } else {
+        onboardingNextBtn.textContent = "Next";
+        onboardingNextBtn.classList.remove('btn-success');
+    }
+}
+
+function closeOnboarding() {
+    if (onboardingModal) onboardingModal.style.display = 'none';
+    if (dontShowCheckbox && dontShowCheckbox.checked) {
+        localStorage.setItem('hideOnboarding', 'true');
+    }
+}
+
+if (onboardingNextBtn) {
+    onboardingNextBtn.addEventListener('click', () => {
+        if (currentStep < totalSteps) {
+            currentStep++;
+            updateOnboardingStep();
+        } else {
+            closeOnboarding();
+        }
+    });
+}
+
+if (onboardingSkipBtn) {
+    onboardingSkipBtn.addEventListener('click', closeOnboarding);
+}
 
 // Start
 document.addEventListener('DOMContentLoaded', initApp);

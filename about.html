@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Kratex™</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            display: block;
+            padding: 40px 20px;
+        }
+
+        .about-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--color-card-bg);
+            border-radius: var(--radius-l);
+            padding: 40px;
+            box-shadow: var(--shadow-card);
+        }
+
+        .header-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 20px;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: var(--color-primary);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .bio-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--color-text-main);
+        }
+
+        .bio-text p {
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        .social-links {
+            margin-top: 40px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            padding: 10px 20px;
+            border-radius: var(--radius-m);
+            background: var(--color-input-bg);
+            color: var(--color-text-main);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .social-btn:hover {
+            background: var(--color-primary);
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="about-container">
+        <div class="header-section">
+            <h1>About Kratex™</h1>
+            <a href="index.html" class="back-link">← Back to Gymkhana</a>
+        </div>
+
+        <div class="bio-text">
+            <img src="images/hero min.jpg" alt="Kratex Hero Image"
+                style="width: 100%; border-radius: var(--radius-m); margin-bottom: 30px; box-shadow: var(--shadow-sm);">
+
+            <p><span class="highlight">Krunal Ghorpade</span>, widely known as <span class="highlight">Kratex™</span>,
+                is a distinguished DJ and music producer hailing from Mumbai, India. His musical journey is driven by a
+                passionate love for Tech-house and techno, seamlessly blending modern tech elements with nostalgic
+                millennial vibes and his Indian heritage. This fusion has led to the creation of the innovative genre
+                “M-House”—a captivating mix of Marathi and House music.</p>
+
+            <p>Kratex™ has garnered global attention with his tracks that incorporate manipulated vocal elements, groovy
+                house drums, and a deep connection to the vibrant essence of Marathi music. Among his notable
+                achievements is becoming the first artist to sign a Marathi song with the renowned EDM label Spinnin’
+                Records. His track “Taambdi Chaamdi,” a collaboration with Shreyas, became a massive hit, going viral
+                and further solidifying his influence in the industry.</p>
+
+            <p>His groundbreaking event concepts, like “Nusta Vibes,” where he exclusively performs his M-House tracks,
+                have created immersive experiences that resonate worldwide. As he continues to remix Marathi music into
+                electrifying house tracks, Kratex™ is leaving an indelible mark on the dance music scene, cementing his
+                legacy as a pioneer of M-House music.</p>
+
+            <p>Kratex™ has gained support and appreciation on his productions from major artists including Afrojack,
+                Chris Lake, Claude Von Stroke, Carnage, Fedde le Grand, Timmy Trumpet, Blasterjaxx, and Club Banditz.
+            </p>
+        </div>
+
+        <div class="social-links">
+            <a href="https://kratex.in" target="_blank" class="social-btn">Official Website</a>
+            <a href="https://mhousemusic.com" target="_blank" class="social-btn">M-House Music</a>
+            <a href="https://linktr.ee/kratexmusic" target="_blank" class="social-btn">Listen to Music</a>
+            <a href="mailto:contact@kratex.in" class="social-btn">Contact</a>
+        </div>
+    </div>
+
+    <script>
+        // Basic Theme Init to match system
+        const savedTheme = localStorage.getItem('kratexTheme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+</body>
+
+</html>
