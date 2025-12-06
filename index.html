@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>100-Day Sound Design Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Icon fonts could be added here if needed, keeping it simple for now -->
+</head>
+
+<body>
+
+    <nav id="sidebar">
+        <h1>
+            <span
+                style="background: var(--color-primary); color: white; border-radius: 8px; padding: 5px 10px;">SD</span>
+            Sound Design Coach
+        </h1>
+
+        <div class="user-profile-section">
+            <div class="user-avatar">👤</div>
+            <div id="profile-name" style="font-weight: 700; color: var(--color-text-main); margin-bottom: 5px;">Guest
+            </div>
+            <div id="challenge-start-date" style="font-size: 11px; color: var(--color-text-muted);">Start: --</div>
+        </div>
+
+        <div style="margin-bottom: 30px;">
+            <div class="menu-item active" id="nav-dashboard-btn">
+                <span style="margin-right: 10px;">📊</span> Dashboard
+            </div>
+            <div class="menu-item" id="nav-analytics-btn">
+                <span style="margin-right: 10px;">📈</span> Analytics
+            </div>
+            <div class="menu-item" id="view-all-tasks-btn-sidebar">
+                <span style="margin-right: 10px;">📝</span> All Tasks
+            </div>
+        </div>
+
+        <div style="margin-top: auto;">
+            <p style="font-size: 12px; font-weight: 600; margin-bottom: 10px; color: var(--color-text-muted);">YOUR
+                PROGRESS</p>
+            <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 5px;">
+                <span>Day <span id="current-day">0</span></span>
+                <span>100 Days</span>
+            </div>
+            <div class="progress-container">
+                <div id="progress-bar" style="width: 0%;"></div>
+            </div>
+
+            <button id="reset-challenge-btn" class="btn-secondary"
+                style="width: 100%; margin-top: 20px; border: 1px dashed var(--color-danger); color: var(--color-danger); font-size: 12px;">
+                Reset Progress
+            </button>
+        </div>
+    </nav>
+
+    <div id="dashboard-main">
+        <header id="dashboard-header"
+            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
+            <div>
+                <h2 id="main-header-title">Dashboard</h2>
+                <div id="user-greeting">Welcome back, <span id="display-user-name">Guest</span>.</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <span style="font-size: 12px; font-weight: 600; color: var(--color-text-muted);">DARK MODE</span>
+                <label class="theme-switch-wrapper">
+                    <label class="theme-switch" for="checkbox">
+                        <input type="checkbox" id="checkbox" />
+                        <div class="slider round"></div>
+                    </label>
+                </label>
+            </div>
+        </header>
+
+        <!-- NOT STARTED STATE -->
+        <div id="not-started-panel" class="card-panel"
+            style="text-align: center; padding: 60px; max-width: 600px; margin: 0 auto; display: none;">
+            <h2 style="color: var(--color-primary); margin-bottom: 15px;">Sound Design Coach</h2>
+            <p style="margin-bottom: 30px;">Commit to 100 days of sound design mastery. Track your progress, build a
+                streak, and evolve your sound.</p>
+            <button id="begin-challenge-btn" class="btn-primary">Start 100-Day Challenge</button>
+        </div>
+
+        <!-- ACTIVE DASHBOARD STATE -->
+        <div class="dashboard-grid" id="started-dashboard" style="display: none;">
+
+            <!-- Stats Row -->
+            <div id="progress-stats-container">
+                <div class="stat-box">
+                    <p>Total Completed</p>
+                    <h3 id="current-day-stat">0</h3>
+                </div>
+                <div class="stat-box">
+                    <p>Days Remaining</p>
+                    <h3 id="remaining-days-stat" style="color: var(--color-primary);">100</h3>
+                </div>
+                <div class="stat-box">
+                    <p>Current Streak</p>
+                    <h3 id="streak-stat" style="color: var(--color-success);">0</h3>
+                </div>
+            </div>
+
+            <!-- Daily Challenge Card -->
+            <section id="daily-challenge" class="card-panel">
+                <div
+                    style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+                    <span
+                        style="background: rgba(74, 108, 247, 0.1); color: var(--color-primary); padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 700;">TODAY'S
+                        TASK</span>
+                </div>
+
+                <h2 id="challenge-title">Loading...</h2>
+                <p id="challenge-description"
+                    style="font-size: 16px; color: var(--color-text-main); margin-bottom: 25px;">
+                    Your daily challenge will appear here.
+                </p>
+
+                <div class="challenge-highlight-box">
+                    <div>
+                        <span class="challenge-label">Primary Plugin</span>
+                        <div id="plugin-focus" class="challenge-value">N/A</div>
+                    </div>
+                    <div>
+                        <span class="challenge-label">Reference Track</span>
+                        <div id="track-reference" class="challenge-value">N/A</div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px;">
+                    <button id="mark-complete-btn" class="btn-primary">Mark Day Complete</button>
+                </div>
+            </section>
+
+            <!-- Streak / Commitment Status -->
+            <div id="streak-lockout" class="card-panel">
+                <h3>Commitment</h3>
+                <div class="info-box-secondary"
+                    style="margin: 20px 0; padding: 20px; border-radius: 12px; text-align: center;">
+                    <div id="streak-display" style="font-size: 24px; font-weight: 700; color: var(--color-success);">
+                        0 Day Streak
+                    </div>
+                    <div style="font-size: 12px; color: var(--color-text-muted); margin-top: 5px;">Keep it up!</div>
+                </div>
+
+                <p id="time-remaining-message"
+                    style="text-align: center; color: var(--color-warning); font-weight: 600; display: none;"></p>
+
+                <button id="view-all-tasks-btn" class="btn-secondary" style="width: 100%;">View Full Roadmap</button>
+            </div>
+        </div>
+
+        <!-- ANALYTICS DASHBOARD STATE -->
+        <div class="dashboard-grid" id="analytics-dashboard" style="display: none;">
+
+            <!-- Analytics Stats Row -->
+            <div style="grid-column: span 12; display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;">
+                <div class="stat-box">
+                    <p>Completion Rate</p>
+                    <h3 id="analytics-completion-rate">0%</h3>
+                </div>
+                <div class="stat-box">
+                    <p>Avg Difficulty</p>
+                    <h3 id="analytics-avg-difficulty" style="color: var(--color-warning);">0.0</h3>
+                </div>
+                <div class="stat-box">
+                    <p>Techniques Learned</p>
+                    <h3 id="analytics-total-learned" style="color: var(--color-secondary);">0</h3>
+                </div>
+            </div>
+
+            <!-- Difficulty Chart -->
+            <div class="card-panel" style="grid-column: span 8;">
+                <h3>Difficulty Distribution</h3>
+                <p style="font-size: 13px; margin-bottom: 20px;">How you rated the difficulty of completed challenges
+                    (1-5).</p>
+
+                <div class="chart-container" id="difficulty-chart">
+                    <!-- Bars injected via JS -->
+                </div>
+            </div>
+
+            <!-- Recent Insights -->
+            <div class="card-panel" style="grid-column: span 4; display: flex; flex-direction: column;">
+                <h3>Recent Insights</h3>
+                <p style="font-size: 13px; margin-bottom: 15px;">Latest things you've learned.</p>
+                <div id="recent-insights-list" style="overflow-y: auto; flex-grow: 1; max-height: 300px;">
+                    <div style="color: var(--color-text-muted); font-size: 13px; font-style: italic;">No data yet.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODALS -->
+
+    <!-- Begin Challenge Modal -->
+    <div id="begin-challenge-modal" class="nb-modal-backdrop"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; align-items: center; justify-content: center;">
+        <div class="nb-modal-content" style="padding: 40px; position: relative;">
+            <button class="close-modal-btn"
+                onclick="document.getElementById('begin-challenge-modal').style.display='none';">×</button>
+            <h2 style="color: var(--color-primary); margin-top: 0;">Setup Profile</h2>
+            <form id="begin-challenge-form">
+                <div style="margin-bottom: 20px;">
+                    <label for="user-name-input">Your Name / Alias</label>
+                    <input type="text" id="user-name-input" required placeholder="Ex. SoundWave">
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <label for="start-date-input">Start Date</label>
+                    <input type="date" id="start-date-input" required readonly
+                        style="background-color: var(--color-input-bg); color: var(--color-text-muted);">
+                </div>
+
+                <button type="submit" class="btn-primary" style="width: 100%;">Start Journey</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Reset Confirmation Modal -->
+    <div id="reset-confirmation-modal" class="nb-modal-backdrop"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; align-items: center; justify-content: center;">
+        <div class="nb-modal-content" style="padding: 40px; text-align: center;">
+            <h2 style="color: var(--color-danger); margin-top: 0;">Reset All Progress?</h2>
+            <p>This action cannot be undone. You will lose your streak and completion history.</p>
+            <div style="margin-top: 30px; display: grid; gap: 10px;">
+                <button id="confirm-reset-btn" class="btn-primary"
+                    style="background: var(--color-danger); box-shadow: 0 10px 20px rgba(238, 93, 80, 0.25);">Yes,
+                    Reset Everything</button>
+                <button onclick="document.getElementById('reset-confirmation-modal').style.display='none';"
+                    class="btn-secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reflection Modal -->
+    <div id="reflection-form-modal" class="nb-modal-backdrop"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; align-items: center; justify-content: center;">
+        <div id="reflection-form-content" class="nb-modal-content" style="padding: 40px;">
+            <h2 style="margin-top: 0;">Day <span id="modal-day-num">0</span> Reflection</h2>
+            <form id="reflection-form">
+
+                <div style="margin-bottom: 25px;">
+                    <label>Difficulty Rating <span id="difficulty-val"
+                            style="color: var(--color-primary); margin-left: 5px;">3</span>/5</label>
+                    <div class="radio-group" style="margin-top: 10px;">
+                        <label class="radio-option">
+                            <input type="radio" name="difficulty" value="1" required>
+                            <span class="radio-label">1</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="difficulty" value="2">
+                            <span class="radio-label">2</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="difficulty" value="3" checked>
+                            <span class="radio-label">3</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="difficulty" value="4">
+                            <span class="radio-label">4</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="difficulty" value="5">
+                            <span class="radio-label">5</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <label for="new-technique">One thing you learned</label>
+                    <input type="text" id="new-technique" placeholder="Ex. New shortcut, plugin trick..." required>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <label for="reflection-notes">Notes</label>
+                    <textarea id="reflection-notes" rows="2" required
+                        placeholder="What worked well? What didn't?"></textarea>
+                </div>
+
+                <div style="margin-bottom: 30px;">
+                    <label>Upload Audio (WAV/MP3)</label>
+                    <input type="file" id="audio-file-input" accept=".wav,.mp3,audio/*" style="display: none;">
+                    <label for="audio-file-input" class="file-upload-wrapper">
+                        <span style="font-size: 24px; margin-bottom: 5px;">📤</span>
+                        <span class="file-upload-text" id="file-upload-name">Click to upload your creation</span>
+                    </label>
+                </div>
+
+                <div style="display: flex; gap: 15px;">
+                    <button type="submit" id="submit-reflection-btn" class="btn-primary" style="flex: 2;">Complete
+                        Day</button>
+                    <button type="button" class="btn-secondary"
+                        onclick="document.getElementById('reflection-form-modal').style.display='none';"
+                        style="flex: 1;">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- All Tasks Modal -->
+    <div id="all-tasks-modal" class="nb-modal-backdrop"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; align-items: center; justify-content: center;">
+        <div id="all-tasks-content" class="nb-modal-content"
+            style="padding: 40px; max-width: 800px; height: 80vh; display: flex; flex-direction: column; position: relative;">
+            <button class="close-modal-btn"
+                onclick="document.getElementById('all-tasks-modal').style.display='none';">×</button>
+            <div style="margin-bottom: 20px;">
+                <h2 style="margin: 0;">Full Roadmap</h2>
+            </div>
+
+            <div id="task-list-container" style="flex-grow: 1; overflow-y: auto; padding-right: 15px;">
+                <!-- Tasks injected here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav id="mobile-bottom-nav">
+        <div class="mobile-nav-item active" id="mobile-nav-dashboard-btn">
+            <span class="mobile-nav-icon">📊</span>
+            <span class="mobile-nav-label">Dashboard</span>
+        </div>
+        <div class="mobile-nav-item" id="mobile-nav-analytics-btn">
+            <span class="mobile-nav-icon">📈</span>
+            <span class="mobile-nav-label">Stats</span>
+        </div>
+        <div class="mobile-nav-item" id="mobile-nav-tasks-btn">
+            <span class="mobile-nav-icon">📝</span>
+            <span class="mobile-nav-label">Tasks</span>
+        </div>
+    </nav>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
