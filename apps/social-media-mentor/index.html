@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Mentor – 21‑Day Sprint</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* Tool Specific Styles */
+        .day-check-icon {
+            font-size: 1.5em;
+            /* Increased size significantly */
+            color: var(--color-text-muted);
+            cursor: pointer;
+            transition: color 0.2s, transform 0.1s;
+            margin-right: 15px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .day-check-icon:hover {
+            color: var(--color-primary);
+        }
+
+        .day-check-icon.checked {
+            color: var(--color-primary);
+            transform: scale(1.1);
+        }
+
+        .task-done {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+
+        details {
+            margin-top: 8px;
+            font-size: 0.9em;
+            color: var(--color-text-muted);
+            cursor: pointer;
+        }
+
+        details summary {
+            font-weight: 500;
+            color: var(--color-secondary, #666);
+            outline: none;
+        }
+
+        /* Dark Mode Toggle Position */
+        .tool-header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Strategy Cards */
+        .strategy-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 5px;
+        }
+
+        .strategy-card {
+            border: 2px solid var(--color-border, #eee);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: var(--color-card-bg, #fff);
+        }
+
+        .strategy-card:hover {
+            border-color: var(--color-primary-light, #ccc);
+            transform: translateY(-2px);
+        }
+
+        .strategy-card.selected {
+            border-color: var(--color-primary);
+            background: var(--color-primary-light-bg, rgba(0, 0, 0, 0.02));
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Calendar Layout Styles */
+        .week-section {
+            margin-bottom: 30px;
+        }
+
+        .week-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .week-title {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: var(--color-text-main);
+        }
+
+        .week-focus {
+            font-size: 0.9em;
+            color: var(--color-text-muted);
+            font-weight: 500;
+        }
+
+        .week-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 12px;
+        }
+
+        .day-card {
+            background: var(--color-card-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 10px;
+            aspect-ratio: 1;
+            /* Square cards */
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .day-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-color: var(--color-primary);
+        }
+
+        .day-card.active {
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 2px rgba(74, 108, 247, 0.2);
+            background: rgba(74, 108, 247, 0.02);
+        }
+
+        .day-card.completed {
+            background: var(--color-success);
+            border-color: var(--color-success);
+        }
+
+        .day-card.completed .day-number,
+        .day-card.completed .day-preview {
+            color: white;
+        }
+
+        .day-number {
+            font-size: 0.8em;
+            font-weight: 700;
+            color: var(--color-text-muted);
+            margin-bottom: 5px;
+        }
+
+        .day-preview {
+            font-size: 0.75em;
+            line-height: 1.3;
+            color: var(--color-text-main);
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+
+        @media (max-width: 1100px) {
+            .dashboard-grid-layout {
+                grid-template-columns: 1fr !important;
+                /* Stack columns */
+            }
+
+            .week-grid {
+                grid-template-columns: repeat(4, 1fr);
+                /* 4 per row on tablet */
+            }
+
+            #day-detail-panel {
+                order: -1;
+                /* Show detail view on top on mobile */
+                margin-bottom: 30px;
+                position: static !important;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .strategy-container {
+                grid-template-columns: 1fr;
+            }
+
+            .week-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Layout Overrides for this specific tool page */
+        body {
+            display: flex !important;
+            flex-direction: column !important;
+            height: auto !important;
+            overflow-y: auto !important;
+        }
+    </style>
+</head>
+
+<body>
+    <nav id="tool-header"
+        style="display: flex; justify-content: space-between; align-items: center; padding: 20px 30px; background: var(--color-card-bg); box-shadow: 0 4px 20px rgba(0,0,0,0.03); width: 100%; box-sizing: border-box;">
+        <div style="flex-grow: 1;">
+            <a href="../../index.html"
+                style="display: flex; align-items: center; gap: 5px; color: var(--color-text-muted); text-decoration: none; font-size: 13px; font-weight: 600; margin-bottom: 5px; transition: color 0.2s;">
+                ← Back to Gymkhana
+            </a>
+            <h1 style="margin: 0; font-size: 1.5em;"><span
+                    style="background: var(--color-primary); color: white; border-radius: 8px; padding: 5px 10px; font-size: 0.8em; margin-right: 10px; vertical-align: middle;">SM</span>
+                Social Media Mentor</h1>
+        </div>
+
+        <!-- Header Actions -->
+        <div class="tool-header-actions">
+            <button onclick="KratexApp.openModal('share-modal')" class="icon-btn" title="Share"><i
+                    class="fas fa-share-alt"></i></button>
+            <button onclick="KratexApp.openModal('settings-modal')" class="icon-btn" title="Settings"><i
+                    class="fas fa-cog"></i></button>
+            <button id="theme-toggle-btn" class="icon-btn" title="Toggle Theme"><i id="theme-icon"
+                    class="fas fa-moon"></i></button>
+            <button id="nav-auth-trigger" class="btn-secondary"
+                style="padding: 5px 15px; font-size: 0.8em; height: 32px; min-width: 80px;">Login</button>
+        </div>
+    </nav>
+
+    <div id="not-started-panel" class="card-panel"
+        style="text-align: center; padding: 60px; max-width: 700px; margin: 0 auto;">
+        <h2 style="color: var(--color-primary); margin-bottom: 15px;">21‑Day Social Media Sprint</h2>
+        <p style="margin-bottom: 30px;">Create a continuous posting schedule tailored to your goals.</p>
+        <form id="start-sprint-form">
+            <div style="margin-bottom: 20px; text-align: left;">
+                <label for="producer-name" style="font-weight: 600; margin-bottom: 8px; display: block;">Your Name /
+                    Brand</label>
+                <input type="text" id="producer-name" required placeholder="e.g. Kratex"
+                    style="width: 100%; padding: 10px; border: 1px solid var(--color-border, #ccc); border-radius: 6px;" />
+            </div>
+
+            <div style="margin-bottom: 25px; text-align: left;">
+                <label for="genre-select" style="font-weight: 600; margin-bottom: 8px; display: block;">Primary Genre /
+                    Niche</label>
+                <select id="genre-select" required
+                    style="width: 100%; padding: 10px; border: 1px solid var(--color-border, #ccc); border-radius: 6px;">
+                    <option value="hiphop">Hip‑Hop</option>
+                    <option value="electronic">Electronic</option>
+                    <option value="pop">Pop</option>
+                    <option value="any">Any / Other</option>
+                </select>
+            </div>
+
+            <div style="margin-bottom: 30px; text-align: left;">
+                <label style="font-weight: 600; margin-bottom: 12px; display: block;">Strategy Level</label>
+                <!-- Pseudo Radio Group for Strategy -->
+                <input type="hidden" id="strategy-select" value="medium">
+                <div class="strategy-container">
+                    <div class="strategy-card" onclick="selectStrategy('light', this)">
+                        <h3>Light</h3>
+                        <p>Beginner friendly</p>
+                    </div>
+                    <div class="strategy-card selected" onclick="selectStrategy('medium', this)">
+                        <h3>Medium</h3>
+                        <p>Standard Growth</p>
+                    </div>
+                    <div class="strategy-card" onclick="selectStrategy('hard', this)">
+                        <h3>Hard</h3>
+                        <p>Aggressive Growth</p>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-primary" style="width: 100%; padding: 15px; font-size: 1.1em;">Generate
+                Plan</button>
+        </form>
+    </div>
+
+    <div id="sprint-dashboard"
+        style="display: none; max-width: 1400px; margin: 0 auto; padding: 40px; box-sizing: border-box;">
+
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px;">
+            <div>
+                <h2 style="color: var(--color-primary); margin: 0; font-size: 2em;">Your 21‑Day Roadmap</h2>
+                <p style="color: var(--color-text-muted); margin-top: 5px;">Select a day to view details and execute
+                    your strategy.</p>
+            </div>
+            <div style="display: flex; gap: 15px;">
+                <button onclick="location.reload()" class="btn-secondary" style="font-size: 13px;">Restart
+                    Sprint</button>
+                <button id="copy-plan-btn" class="btn-primary" style="font-size: 13px; padding: 10px 20px;">
+                    <i class="far fa-copy" style="margin-right: 8px;"></i> Copy Full Plan
+                </button>
+            </div>
+        </div>
+
+        <div class="dashboard-grid-layout"
+            style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: start;">
+
+            <!-- Left Side: Calendar View -->
+            <div class="calendar-container">
+                <!-- Week 1 -->
+                <div class="week-section">
+                    <div class="week-header">
+                        <span class="week-title">Week 1</span>
+                        <span class="week-focus">Focus: Foundation & Consistency</span>
+                    </div>
+                    <div class="week-grid" id="week-1-grid"></div>
+                </div>
+
+                <!-- Week 2 -->
+                <div class="week-section">
+                    <div class="week-header">
+                        <span class="week-title">Week 2</span>
+                        <span class="week-focus">Focus: Engagement & Community</span>
+                    </div>
+                    <div class="week-grid" id="week-2-grid"></div>
+                </div>
+
+                <!-- Week 3 -->
+                <div class="week-section">
+                    <div class="week-header">
+                        <span class="week-title">Week 3</span>
+                        <span class="week-focus">Focus: Growth & Virality</span>
+                    </div>
+                    <div class="week-grid" id="week-3-grid"></div>
+                </div>
+            </div>
+
+            <!-- Right Side: Detail View -->
+            <div id="day-detail-panel" class="card-panel"
+                style="position: sticky; top: 20px; min-height: 500px; padding: 40px; display: flex; flex-direction: column;">
+                <div id="empty-state" style="text-align: center; color: var(--color-text-muted); margin: auto;">
+                    <i class="fas fa-calendar-day" style="font-size: 4em; margin-bottom: 20px; opacity: 0.2;"></i>
+                    <h3>Select a day from the left</h3>
+                    <p>Click on any day card to view the specific strategy and psychology behind it.</p>
+                </div>
+
+                <div id="active-day-content" style="display: none; animation: fadeIn 0.3s ease;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 20px;">
+                        <span id="detail-day-number"
+                            style="background: var(--color-primary); color: white; padding: 5px 12px; border-radius: 20px; font-weight: 700; font-size: 0.9em;">DAY
+                            1</span>
+                        <span id="detail-difficulty"
+                            style="text-transform: uppercase; font-size: 0.8em; font-weight: 600; color: var(--color-text-muted);">DIFFICULTY</span>
+                    </div>
+
+                    <h2 id="detail-task"
+                        style="font-size: 1.8em; line-height: 1.3; color: var(--color-text-main); margin-bottom: 30px;">
+                        Task Description Goes Here
+                    </h2>
+
+                    <div
+                        style="margin-bottom: 30px; padding: 20px; background: rgba(74, 108, 247, 0.05); border-radius: 12px; border-left: 4px solid var(--color-primary);">
+                        <h4
+                            style="color: var(--color-primary); margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                            <i class="fas fa-brain"></i> Psychology
+                        </h4>
+                        <p id="detail-psychology" style="color: var(--color-text-main); font-size: 1.05em;">Explanation
+                            of the psychology...</p>
+                    </div>
+
+                    <div
+                        style="padding: 20px; background: var(--color-bg-secondary); border-radius: 12px; margin-bottom: 20px;">
+                        <h4
+                            style="color: var(--color-secondary); margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                            <i class="fas fa-rocket"></i> Why it works
+                        </h4>
+                        <p id="detail-why" style="color: var(--color-text-main); font-size: 1.05em; opacity: 0.8;">
+                            Explanation of the impact...</p>
+                    </div>
+
+                    <p id="detail-source"
+                        style="font-size: 0.85em; color: var(--color-text-muted); font-style: italic; text-align: right; margin-top: 0;">
+                        Source info here
+                    </p>
+
+                    <div style="margin-top: 20px; text-align: center;">
+                        <button id="mark-complete-btn" class="btn-secondary" style="width: 100%;">
+                            <i class="far fa-circle"></i> Mark as Complete
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/global.js"></script>
+    <script src="script.js"></script>
+</body>

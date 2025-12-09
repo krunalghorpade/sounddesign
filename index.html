@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kratex Tools Store</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         /* Landing Page Specific Overrides */
         body {
@@ -133,13 +134,14 @@
 <body>
 
     <header class="landing-header">
-        <span style="font-size: 12px; font-weight: 600; color: var(--color-text-muted);">DARK MODE</span>
-        <label class="theme-switch-wrapper">
-            <label class="theme-switch" for="checkbox">
-                <input type="checkbox" id="checkbox" />
-                <div class="slider round"></div>
-            </label>
-        </label>
+        <button onclick="KratexApp.openModal('share-modal')" class="icon-btn" title="Share"><i
+                class="fas fa-share-alt"></i></button>
+        <button onclick="KratexApp.openModal('settings-modal')" class="icon-btn" title="Settings"><i
+                class="fas fa-cog"></i></button>
+        <button id="theme-toggle-btn" class="icon-btn" title="Toggle Theme"><i id="theme-icon"
+                class="fas fa-moon"></i></button>
+        <button id="nav-auth-trigger" class="btn-secondary"
+            style="padding: 5px 15px; font-size: 0.8em; height: 32px;">Login</button>
     </header>
 
     <div class="hero-section">
@@ -170,6 +172,7 @@
         </div>
     </div>
 
+    <script src="js/global.js"></script>
     <script>
         // --- Tool Data ---
         const TOOLS = [
@@ -188,6 +191,14 @@
                 icon: '⚡',
                 url: 'apps/flash-cards/index.html',
                 tags: ['music', 'theory', 'books', 'wisdom']
+            },
+            {
+                id: 'social-media-mentor',
+                title: 'Social Media Mentor',
+                description: 'A 21‑day sprint to plan and execute daily social media posts for music producers.',
+                icon: '📱',
+                url: 'apps/social-media-mentor/index.html',
+                tags: ['social', 'marketing', 'content', '21-day']
             },
             // Placeholder for future tools
             {
@@ -212,7 +223,6 @@
 
         const searchInput = document.getElementById('search-bar');
         const gridContainer = document.getElementById('tools-grid');
-        const themeCheckbox = document.getElementById('checkbox');
 
         // --- Render Logic ---
         function renderTools(filter = '') {
@@ -255,26 +265,8 @@
             renderTools(e.target.value);
         });
 
-        // --- Theme Logic ---
-        function initTheme() {
-            // Check local storage specific to this main page, 
-            // OR use the same key as the app if we want shared state.
-            // Let's use 'kratexGlobalTheme' to be safe or just reuse 'challengeState' logic partially?
-            // For simplicity, let's use a simple key 'theme'.
-            const savedTheme = localStorage.getItem('kratexTheme') || 'light';
-            document.documentElement.setAttribute('data-theme', savedTheme);
-            if (savedTheme === 'dark') themeCheckbox.checked = true;
-        }
-
-        themeCheckbox.addEventListener('change', (e) => {
-            const newTheme = e.target.checked ? 'dark' : 'light';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('kratexTheme', newTheme);
-        });
-
         // Init
         renderTools();
-        initTheme();
 
     </script>
 </body>

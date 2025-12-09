@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>100-Day Sound Design Dashboard</title>
     <link rel="stylesheet" href="../../style.css">
-    <!-- Icon fonts could be added here if needed, keeping it simple for now -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
 
     <nav id="sidebar">
+        <!-- ... existing sidebar ... -->
         <!-- Back Link -->
         <a href="../../index.html"
             style="display: flex; align-items: center; gap: 5px; color: var(--color-text-muted); text-decoration: none; font-size: 13px; font-weight: 600; margin-bottom: 20px; transition: color 0.2s;">
@@ -80,14 +81,15 @@
                 <h2 id="main-header-title">Dashboard</h2>
                 <div id="user-greeting">Welcome back, <span id="display-user-name">Guest</span>.</div>
             </div>
-            <div style="display: flex; align-items: center; gap: 15px;">
-                <span style="font-size: 12px; font-weight: 600; color: var(--color-text-muted);">DARK MODE</span>
-                <label class="theme-switch-wrapper">
-                    <label class="theme-switch" for="checkbox">
-                        <input type="checkbox" id="checkbox" />
-                        <div class="slider round"></div>
-                    </label>
-                </label>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <button onclick="KratexApp.openModal('share-modal')" class="icon-btn" title="Share"><i
+                        class="fas fa-share-alt"></i></button>
+                <button onclick="KratexApp.openModal('settings-modal')" class="icon-btn" title="Settings"><i
+                        class="fas fa-cog"></i></button>
+                <button id="theme-toggle-btn" class="icon-btn" title="Toggle Theme"><i id="theme-icon"
+                        class="fas fa-moon"></i></button>
+                <button id="nav-auth-trigger" class="btn-secondary"
+                    style="padding: 5px 15px; font-size: 0.8em; height: 32px; min-width: 80px;">Login</button>
             </div>
         </header>
 
@@ -170,8 +172,8 @@
 
         <!-- ANALYTICS DASHBOARD STATE -->
         <div class="dashboard-grid" id="analytics-dashboard" style="display: none;">
-
-            <!-- Analytics Stats Row -->
+            <!-- ... analytics ... -->
+            <!-- Stats Row -->
             <div style="grid-column: span 12; display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;">
                 <div class="stat-box">
                     <p>Completion Rate</p>
@@ -209,6 +211,121 @@
         </div>
     </div>
 
+    <!-- ... Modals ... -->
+    <!-- Begin Challenge Modal (Updated Trigger in script) -->
+    <!-- ... -->
+    <!-- (I am not including the entire modal content here to save space as replace_file_content does exact matching, I'll rely on the EndLine 101 to match the top part primarily then assume rest is same?) -->
+    <!-- Wait, replace_file_content requires TargetContent to look for. I cannot just pass PART of the file. -->
+    <!-- I will target the header section specifically. -->
+
+
+    <!-- ACTIVE DASHBOARD STATE -->
+    <div class="dashboard-grid" id="started-dashboard" style="display: none;">
+
+        <!-- Stats Row -->
+        <div id="progress-stats-container">
+            <div class="stat-box">
+                <p>Total Completed</p>
+                <h3 id="current-day-stat">0</h3>
+            </div>
+            <div class="stat-box">
+                <p>Days Remaining</p>
+                <h3 id="remaining-days-stat" style="color: var(--color-primary);">100</h3>
+            </div>
+            <div class="stat-box">
+                <p>Current Streak</p>
+                <h3 id="streak-stat" style="color: var(--color-success);">0</h3>
+            </div>
+        </div>
+
+        <!-- Daily Challenge Card -->
+        <section id="daily-challenge" class="card-panel">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+                <span
+                    style="background: rgba(74, 108, 247, 0.1); color: var(--color-primary); padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 700;">TODAY'S
+                    TASK</span>
+            </div>
+
+            <h2 id="challenge-title">Loading...</h2>
+            <p id="challenge-description" style="font-size: 16px; color: var(--color-text-main); margin-bottom: 25px;">
+                Your daily challenge will appear here.
+            </p>
+
+            <div class="challenge-highlight-box">
+                <div>
+                    <span class="challenge-label">Primary Plugin</span>
+                    <div id="plugin-focus" class="challenge-value">N/A</div>
+                </div>
+                <div>
+                    <span class="challenge-label">Reference Track</span>
+                    <div id="track-reference" class="challenge-value">N/A</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 30px;">
+                <button id="mark-complete-btn" class="btn-primary">Mark Day Complete</button>
+            </div>
+        </section>
+
+        <!-- Streak / Commitment Status -->
+        <div id="streak-lockout" class="card-panel">
+            <h3>Commitment</h3>
+            <div class="info-box-secondary"
+                style="margin: 20px 0; padding: 20px; border-radius: 12px; text-align: center;">
+                <div id="streak-display" style="font-size: 24px; font-weight: 700; color: var(--color-success);">
+                    0 Day Streak
+                </div>
+                <div style="font-size: 12px; color: var(--color-text-muted); margin-top: 5px;">Keep it up!</div>
+            </div>
+
+            <p id="time-remaining-message"
+                style="text-align: center; color: var(--color-warning); font-weight: 600; display: none;"></p>
+
+            <button id="view-all-tasks-btn" class="btn-secondary" style="width: 100%;">View Full Roadmap</button>
+        </div>
+    </div>
+
+    <!-- ANALYTICS DASHBOARD STATE -->
+    <div class="dashboard-grid" id="analytics-dashboard" style="display: none;">
+
+        <!-- Analytics Stats Row -->
+        <div style="grid-column: span 12; display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;">
+            <div class="stat-box">
+                <p>Completion Rate</p>
+                <h3 id="analytics-completion-rate">0%</h3>
+            </div>
+            <div class="stat-box">
+                <p>Avg Difficulty</p>
+                <h3 id="analytics-avg-difficulty" style="color: var(--color-warning);">0.0</h3>
+            </div>
+            <div class="stat-box">
+                <p>Techniques Learned</p>
+                <h3 id="analytics-total-learned" style="color: var(--color-secondary);">0</h3>
+            </div>
+        </div>
+
+        <!-- Difficulty Chart -->
+        <div class="card-panel" style="grid-column: span 8;">
+            <h3>Difficulty Distribution</h3>
+            <p style="font-size: 13px; margin-bottom: 20px;">How you rated the difficulty of completed challenges
+                (1-5).</p>
+
+            <div class="chart-container" id="difficulty-chart">
+                <!-- Bars injected via JS -->
+            </div>
+        </div>
+
+        <!-- Recent Insights -->
+        <div class="card-panel" style="grid-column: span 4; display: flex; flex-direction: column;">
+            <h3>Recent Insights</h3>
+            <p style="font-size: 13px; margin-bottom: 15px;">Latest things you've learned.</p>
+            <div id="recent-insights-list" style="overflow-y: auto; flex-grow: 1; max-height: 300px;">
+                <div style="color: var(--color-text-muted); font-size: 13px; font-style: italic;">No data yet.</div>
+            </div>
+        </div>
+    </div>
+    </div>
+
     <!-- MODALS -->
 
     <!-- Begin Challenge Modal -->
@@ -223,13 +340,29 @@
                     <label for="user-name-input">Your Name / Alias</label>
                     <input type="text" id="user-name-input" required placeholder="Ex. SoundWave">
                 </div>
-
+                <div style="margin-bottom: 20px;">
+                    <label for="daw-select">Preferred DAW</label>
+                    <select id="daw-select" required>
+                        <option value="ableton">Ableton Live</option>
+                        <option value="flstudio">FL Studio</option>
+                        <option value="protools">Pro Tools</option>
+                        <option value="any">Any / Other</option>
+                    </select>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label for="genre-select">Preferred Genre</label>
+                    <select id="genre-select" required>
+                        <option value="pop">Pop</option>
+                        <option value="hiphop">Hip‑Hop</option>
+                        <option value="electronic">Electronic</option>
+                        <option value="any">Anything</option>
+                    </select>
+                </div>
                 <div style="margin-bottom: 20px;">
                     <label for="start-date-input">Start Date</label>
                     <input type="date" id="start-date-input" required readonly
                         style="background-color: var(--color-input-bg); color: var(--color-text-muted);">
                 </div>
-
                 <button type="submit" class="btn-primary" style="width: 100%;">Start Journey</button>
             </form>
         </div>
@@ -404,6 +537,7 @@
         </div>
     </div>
 
+    <script src="../../js/global.js"></script>
     <script src="script.js"></script>
 </body>
 

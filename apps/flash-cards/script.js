@@ -12,22 +12,8 @@ const appListEl = document.getElementById('app-list');
 
 const themeCheckbox = document.getElementById('checkbox');
 
-// --- Theme Logic (Shared) ---
-function initTheme() {
-    const savedTheme = localStorage.getItem('kratexTheme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    if (savedTheme === 'dark' && themeCheckbox) {
-        themeCheckbox.checked = true;
-    }
-}
-
-if (themeCheckbox) {
-    themeCheckbox.addEventListener('change', (e) => {
-        const newTheme = e.target.checked ? 'dark' : 'light';
-        document.documentElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('kratexTheme', newTheme);
-    });
-}
+// --- Theme Logic ---
+// Handled by global.js
 
 // --- FALLBACK DATA (For offline/file:// usage) ---
 const FALLBACK_FLASHCARDS = [
@@ -702,24 +688,30 @@ function renderDailyCard() {
 
 // --- Navigation Handlers ---
 document.getElementById('prev-card-btn').addEventListener('click', () => {
-    // Sequential navigation
-    loadCardAtIndex(currentCardIndex - 1);
-    updateLabel("Card");
+    KratexApp.requireAuth(() => {
+        // Sequential navigation
+        loadCardAtIndex(currentCardIndex - 1);
+        updateLabel("Card");
+    });
 });
 
 document.getElementById('next-card-btn').addEventListener('click', () => {
-    loadCardAtIndex(currentCardIndex + 1);
-    updateLabel("Card");
+    KratexApp.requireAuth(() => {
+        loadCardAtIndex(currentCardIndex + 1);
+        updateLabel("Card");
+    });
 });
 
 document.getElementById('shuffle-btn').addEventListener('click', () => {
-    // Pure random
-    let newIndex = getRandomIndex();
-    // Avoid immediate repeat
-    if (newIndex === currentCardIndex) newIndex = getRandomIndex();
+    KratexApp.requireAuth(() => {
+        // Pure random
+        let newIndex = getRandomIndex();
+        // Avoid immediate repeat
+        if (newIndex === currentCardIndex) newIndex = getRandomIndex();
 
-    loadCardAtIndex(newIndex);
-    updateLabel("Random Insight");
+        loadCardAtIndex(newIndex);
+        updateLabel("Random Insight");
+    });
 });
 
 function updateLabel(textPrefix) {
@@ -744,6 +736,6 @@ async function loadCards() {
 
 // --- Init ---
 document.addEventListener('DOMContentLoaded', () => {
-    initTheme();
+    // initTheme();
     loadCards();
 });

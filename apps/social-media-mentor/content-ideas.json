@@ -1,0 +1,255 @@
+{
+    "hiphop": [
+        {
+            "task": "Share a 15-second beat-making timelapse",
+            "difficulty": "light",
+            "psychology": "Our brains are wired to process visual stimuli 60,000 times faster than text. Fast-paced visual changes keep the dopamine system engaged, preventing the user from scrolling past. This leverages 'process visualization', where seeing something being built satisfies our innate curiosity about how things are made.",
+            "whyItWorks": "In the attention economy, you have less than 3 seconds to hook a viewer. A timelapse immediately signals action and creativity without asking for a significant time investment. It proves you are a productive, working artist, which builds subconscious trust with your audience.",
+            "source": "Brain Rules by John Medina"
+        },
+        {
+            "task": "Post a poll: 'Hard Drums or Melodic Samples?'",
+            "difficulty": "light",
+            "psychology": "This utilizes 'Hick's Law' by simplifying the decision-making process into a binary choice. Reducing cognitive load makes it effortless for users to interact. Furthermore, it triggers the 'Social Identity Theory', where people feel a strong urge to identify with a specific group or preference.",
+            "whyItWorks": "Interactive stickers like polls significantly boost your engagement rate (ER). Algorithms interpret this high touch-rate as a signal that your content is valuable, subsequently increasing the reach of your future posts.",
+            "source": "Thinking, Fast and Slow by Daniel Kahneman"
+        },
+        {
+            "task": "Share a photo of your current studio view with a 'Cooking up' caption",
+            "difficulty": "light",
+            "psychology": "This is a form of 'Social Proof' and consistency. It signals to your tribe that you are active and disciplined. Regular exposure to your environment creates a sense of familiarity (Mere Exposure Effect), which breeds liking and trust.",
+            "whyItWorks": "It keeps you top-of-mind without being salesy. Fans and collaborators want to work with active artists. By consistently showing up, you position yourself as a serious professional rather than a hobbyist.",
+            "source": "Influence: The Psychology of Persuasion by Robert Cialdini"
+        },
+        {
+            "task": "Ask: 'Who is the GOAT producer?'",
+            "difficulty": "light",
+            "psychology": "This taps into 'Tribalism' and the human desire to defend one's opinions. It invites controversy and debate, which are high-arousal emotions that drive people to comment. People define their identity by who they champion.",
+            "whyItWorks": "Comments are weighted heavily by ranking algorithms (more than likes). A debate in your comments section creates a 'virality loop' where the platform keeps showing the post to more people to fuel the discussion.",
+            "source": "Contagious: Why Things Catch On by Jonah Berger"
+        },
+        {
+            "task": "Repost a local artist's track to your story",
+            "difficulty": "light",
+            "psychology": "This engages the 'Rule of Reciprocity'. When you do something nice for someone without being asked, they feel a deep psychological obligation to return the favor. It also signals that you are a community builder, not just a taker.",
+            "whyItWorks": "Networking is the lifeblood of the music industry. By publicly supporting others, you increase the likelihood of them sharing your content in the future, effectively cross-pollinating your audiences.",
+            "source": "Give and Take by Adam Grant"
+        },
+        {
+            "task": "Break down how you chopped a specific sample",
+            "difficulty": "medium",
+            "psychology": "This establishes 'Authority Bias'. By demonstrating technical competence, you signal to peers that you are an expert. It also satisfies the 'Curiosity Gap'—users stop scrolling to find out the secret behind the sound.",
+            "whyItWorks": "Educational content is highly 'saveable'. Saves are a super-metric for algorithms because they indicate high-value, evergreen content that users want to return to later.",
+            "source": "Show Your Work! by Austin Kleon"
+        },
+        {
+            "task": "Share a snippet of a beat and ask 'Who should rap on this?'",
+            "difficulty": "medium",
+            "psychology": "This creates an 'Open Loop' in the viewer's mind, inviting them to complete the narrative. It also triggers imagination, forcing listeners to actively audition artists in their head rather than passively consuming.",
+            "whyItWorks": "It generates highly qualified leads for collaboration. People will tag artists, effectively doing your outreach for you. It serves as both content and a direct sales funnel for selling beats.",
+            "source": "Made to Stick by Chip & Dan Heath"
+        },
+        {
+            "task": "Post a 'How-To' on mixing 808s",
+            "difficulty": "medium",
+            "psychology": "Teaching triggers the 'Helper's High' for you and gratitude from the viewer. It leverages the 'Liking Bias'—we like people who help us solve problems. By solving a specific pain point (muddy 808s), you become a go-to resource.",
+            "whyItWorks": "Problem-solution content builds deep trust. When a producer learns something from you, they are far more likely to buy your sound kits or courses later because you've already demonstrated value upfront.",
+            "source": "Jab, Jab, Jab, Right Hook by Gary Vaynerchuk"
+        },
+        {
+            "task": "Freestyle or play a live beat performance (1 min)",
+            "difficulty": "hard",
+            "psychology": "Live performance demonstrates high status and competence. It also conveys 'Authenticity', cutting through the noise of perfectly curated/edited content. The risk of error in a live performance captures viewer attention (risk assessment).",
+            "whyItWorks": "Video content where a human face or hands are visible and moving tends to retain retention longer. It differentiates you from 'drag-and-drop' producers by showing actual musicianship.",
+            "source": "The Laws of Human Nature by Robert Greene"
+        },
+        {
+            "task": "Tell the story of your biggest failure/rejection",
+            "difficulty": "hard",
+            "psychology": "This leverages the 'Pratfall Effect', where competent individuals become more likable after making a mistake. Vulnerability fosters a deep emotional connection and makes you relatable, breaking the 'instagram perfection' facade.",
+            "whyItWorks": "Stories of struggle are universally resonant. They inspire engagement in the form of supportive comments and DMs, deepening the bond between artist and 'superfan'. It transforms a follower into a supporter.",
+            "source": "Daring Greatly by Brené Brown"
+        },
+        {
+            "task": "Deconstruct your most popular track from scratch",
+            "difficulty": "hard",
+            "psychology": "This utilizes 'Insider Status'. Giving a peek behind the curtain makes your audience feel like VIPs with special access. It demystifies your success, making it seem attainable, which is inspiring.",
+            "whyItWorks": "Long-form breakdowns (even 60 seconds) have high watch time. High retention rates signal to the algorithm that your content is captivating, prompting it to push the video to broader, lookalike audiences.",
+            "source": "Building a StoryBrand by Donald Miller"
+        },
+        {
+            "task": "Share a motivational quote",
+            "difficulty": "light",
+            "psychology": "Motivational content works because of 'Emotional Contagion'. People looking for a dopamine hit or reassurance align with positive affirmations. It validates their own struggles.",
+            "whyItWorks": "These posts are highly shareable to Stories. People share them to signal their own values and identity to their followers, which gives you free exposure to their networks.",
+            "source": "Viral Loop by Adam Penenberg"
+        },
+        {
+            "task": "Post a 'Guess the BPM' challenge",
+            "difficulty": "light",
+            "psychology": "Gamification taps into our intrinsic drive for mastery and competition. The 'Information Gap Theory' suggests we have an itch to know the answer when presented with a question.",
+            "whyItWorks": "It’s a low-barrier entry for engagement. It doesn't require a paragraph of text to comment, just a number. Lower friction equals higher volume of interaction.",
+            "source": "Hooked: How to Build Habit-Forming Products by Nir Eyal"
+        },
+        {
+            "task": "Share your favorite saturation plugin",
+            "difficulty": "medium",
+            "psychology": "Curating resources leverages 'Social Currency'. When you share a secret weapon, you appear knowledgeable and generous. It validates your expertise.",
+            "whyItWorks": "It attracts a very specific, high-value demographic: other creators. These are the people most likely to buy sample packs or presets from you.",
+            "source": "Contagious by Jonah Berger"
+        },
+        {
+            "task": "Collaboration Call: 'Looking for rappers for this beat pack'",
+            "difficulty": "medium",
+            "psychology": "This works on the principle of 'Scarcity' and 'Fear Of Missing Out' (FOMO). By presenting it as a limited opportunity, you drive immediate action.",
+            "whyItWorks": "It's a direct Call To Action (CTA) that drives bottom-line results. Unlike passive content, this asks for a transaction (time/collaboration), effectively converting attention into business.",
+            "source": "Influence by Robert Cialdini"
+        }
+    ],
+    "electronic": [
+        {
+            "task": "Post a 10-second ambient synth texture",
+            "difficulty": "light",
+            "psychology": "Aesthetic arrest. In a chaotic feed, a moment of calm stands out. It provides a 'Restorative Environment' for the brain, associating your brand with relief and pleasure.",
+            "whyItWorks": "It functions as a 'palate cleanser'. These posts often get high replay rates as people loop them to relax, signaling high engagement intensity to the platform.",
+            "source": "The Experience Economy by Joseph Pine"
+        },
+        {
+            "task": "Share your 'Song of the Day' recommendation",
+            "difficulty": "light",
+            "psychology": "Curation is a form of leadership. According to 'Social Learning Theory', we look to modeled behaviors (tastemakers) to decide what is good. By curating, you elevate your status.",
+            "whyItWorks": "It connects you to the culture. Tagging the artist you recommend can lead to them reposting you, exposing your profile to their likely larger fanbase.",
+            "source": "Hit Makers by Derek Thompson"
+        },
+        {
+            "task": "Poll: 'House or Techno?'",
+            "difficulty": "light",
+            "psychology": "This exploits 'In-Group Bias'. People have strong identities tied to music subcultures. They are eager to signal their membership to the 'House' or 'Techno' tribe publicly.",
+            "whyItWorks": "It's the ultimate low-friction engagement bait. It requires zero typing, just a tap. This trains your audience to interact with your content, warming them up for bigger asks later.",
+            "source": "Tribes by Seth Godin"
+        },
+        {
+            "task": "Photo of your DAW session with 'Finishing touches...'",
+            "difficulty": "light",
+            "psychology": "The 'Zeigarnik Effect' states that people remember uncompleted or interrupted tasks better than completed ones. It creates tension and anticipation for the final result.",
+            "whyItWorks": "This is 'Pre-Marketing'. You are building hype before the product exists. When the song drops, the audience is already psychologically invested in its completion.",
+            "source": "Pre-Suasion by Robert Cialdini"
+        },
+        {
+            "task": "Quick sound design trick (e.g., LFO on cutoff)",
+            "difficulty": "medium",
+            "psychology": "'Epistemic Curiosity'. Humans have a drive to eliminate information gaps. Seeing a complex sound explained simply is satisfying and empowers the viewer.",
+            "whyItWorks": "Tutorial content is evergreen. People save it to reference later. High 'Save' counts act as a super-signal to the algorithm that your content is valuable reference material.",
+            "source": "Made to Stick by Chip & Dan Heath"
+        },
+        {
+            "task": "Video of a drop buildup",
+            "difficulty": "medium",
+            "psychology": "Music works on tension and release. A buildup creates physiological arousal (increased heart rate). Cutting the video right at the drop can create a 'Cliffhanger Effect'.",
+            "whyItWorks": "High energy retains attention. If you cut it before the drop, you drive people to your bio to hear the full track (Click-Through Rate). If you show the drop, you get the dopamine payoff that creates fans.",
+            "source": "This Is Your Brain on Music by Daniel Levitin"
+        },
+        {
+            "task": "Walkthrough of your vocal processing chain",
+            "difficulty": "hard",
+            "psychology": "Benevolence-based trust. Sharing trade secrets signals that you are confident enough in your taste that you don't need to hoard tactics. It triggers 'Reciprocal Altruism'.",
+            "whyItWorks": "Vocal production is a high-pain point for many producers. Solving this high-value problem establishes you as an authority, making people more likely to purchase your presets or mixing services.",
+            "source": "The Trusted Advisor by David Maister"
+        },
+        {
+            "task": "Live jam on hardware or controller (2+ mins)",
+            "difficulty": "hard",
+            "psychology": "Flow State. Watching someone in a state of mastery is inherently captivating (Mirror Neurons fire as if we are doing it). It feels authentic and unmanufactured.",
+            "whyItWorks": "Live jams have high re-watchability. They separate you from 'button pushers' and establish you as a 'real musician', which commands higher respect and capability trust.",
+            "source": "Flow: The Psychology of Optimal Experience by Mihaly Csikszentmihalyi"
+        },
+        {
+            "task": "Share the concept/story behind your latest EP",
+            "difficulty": "hard",
+            "psychology": "Narrative Transportation Theory. When people are immersed in a story, their critical faculties are suspended, and they become more emotionally susceptible to the message.",
+            "whyItWorks": "It turns a commodity (a song) into an experience. People don't buy what you do; they buy why you do it. This deepens loyalty from casual listeners to true fans.",
+            "source": "Start With Why by Simon Sinek"
+        }
+    ],
+    "pop": [
+        {
+            "task": "Post a selfie with 'Writing session' caption",
+            "difficulty": "light",
+            "psychology": "Evolutionary Psychology (Pareidolia). Our brains are hardwired to detect and focus on human faces, especially eyes. It releases oxytocin, creating a sense of connection.",
+            "whyItWorks": "Face content consistently outperforms non-face content on social platforms. It humanizes the brand, reminding fans they are supporting a person, not a logo.",
+            "source": "Social: Why Our Brains Are Wired to Connect by Matthew Lieberman"
+        },
+        {
+            "task": "Ask: 'What song puts you in a good mood?'",
+            "difficulty": "light",
+            "psychology": "Self-Referencing Effect. Information related to the self is processed more deeply. People love talking about themselves and their preferences.",
+            "whyItWorks": "It generates a high volume of comments, which signals community health to the algorithm. It also gives you market research on what your audience actually listens to.",
+            "source": "The Self Illusion by Bruce Hood"
+        },
+        {
+            "task": "Share a snippet of a demo melody (voice memo)",
+            "difficulty": "medium",
+            "psychology": "The Scarcity Principle (Exclusivity). Hearing something raw and unfinished feels like a secret. It creates a proximal bond/intimacy between artist and fan.",
+            "whyItWorks": "It allows you to A/B test material before investing money in production. If the demo flops, you save money. If it goes viral, you have a guaranteed hit to finish.",
+            "source": "The Lean Startup by Eric Ries"
+        },
+        {
+            "task": "Cover a trending song hook (30 secs)",
+            "difficulty": "medium",
+            "psychology": "The Mere Exposure Effect. People prefer things they are already familiar with. By covering a hit, you lower the barrier to entry for listening to your voice.",
+            "whyItWorks": "Trend-jacking allows you to draft off the traffic of a viral search term. It is one of the fastest ways to expose your vocal tone to a colder audience.",
+            "source": "Hit Makers by Derek Thompson"
+        },
+        {
+            "task": "Write a song from scratch in 1 hour (timelapse/vlog)",
+            "difficulty": "hard",
+            "psychology": "Competence signaling through constraint. Working under a deadline demonstrates flow and skill, commanding respect. It engages the 'Effort Heuristic'—we value things more if we see the effort put in.",
+            "whyItWorks": "It serves as fantastic 'Process Content'. It’s an engaging story arc (start to finish) that fits perfectly in short-form video constraints.",
+            "source": "Deep Work by Cal Newport"
+        },
+        {
+            "task": "Share a personal story about a lyric you wrote",
+            "difficulty": "hard",
+            "psychology": "Vulnerability and empathy. Breaking down the barrier between 'performer' and 'person' allows fans to map their own experiences onto yours (Identification).",
+            "whyItWorks": "This creates 'Superfans'. Converting a casual listener to a superfan requires emotional resonance. This content is the bridge.",
+            "source": "Primal Branding by Patrick Hanlon"
+        }
+    ],
+    "any": [
+        {
+            "task": "Share your morning routine",
+            "difficulty": "medium",
+            "psychology": "Voyeurism and Social Comparison Theory. We are naturally curious about the private lives and habits of others to benchmark our own behaviors.",
+            "whyItWorks": "Lifestyle content broadens your appeal beyond just music heads. It allows people to buy into your 'aesthetic' and discipline, not just your sound.",
+            "source": "The Power of Habit by Charles Duhigg"
+        },
+        {
+            "task": "Thank your followers for their support",
+            "difficulty": "light",
+            "psychology": "Gratitude works on the principle of 'Positive Reinforcement'. By rewarding the behavior you want (following/listening), you encourage it to happen again.",
+            "whyItWorks": "It strengthens the parasocial relationship. Followers feel 'seen' and appreciated, which prevents churn/unfollowing.",
+            "source": "How to Win Friends and Influence People by Dale Carnegie"
+        },
+        {
+            "task": "Share a failure and what you learned",
+            "difficulty": "hard",
+            "psychology": "Authenticity. In a world of curated highlights, reality stands out. Admitting failure shows confidence (you aren't afraid of looking weak) and builds trust.",
+            "whyItWorks": "Inspiration porn. People love a redemption arc. It positions you as a mentor figure who has traversed the path and can guide others.",
+            "source": "Ego Is the Enemy by Ryan Holiday"
+        },
+        {
+            "task": "Post a meme about producer struggles",
+            "difficulty": "light",
+            "psychology": "In-Group Humor. Humor relies on shared knowledge/context. Understanding the joke validates membership in the producer community.",
+            "whyItWorks": "Memes are the most shareable content type. They act as a vehicle for your brand logo/handle to travel across the internet effortlessly.",
+            "source": "The Meme Machine by Susan Blackmore"
+        },
+        {
+            "task": "Ask for feedback on a work in progress",
+            "difficulty": "medium",
+            "psychology": "The Ikea Effect. People value things more when they have a hand in creating them. By asking for feedback, you make them co-creators of your song.",
+            "whyItWorks": "It increases 'Stickiness'. A fan who commented on a demo is psychologically committed to listening to the final version to see if you took their advice.",
+            "source": "Predictably Irrational by Dan Ariely"
+        }
+    ]
+}

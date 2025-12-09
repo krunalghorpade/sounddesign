@@ -164,9 +164,12 @@ const fileUploadName = document.getElementById('file-upload-name');
 let state = JSON.parse(localStorage.getItem('challengeState')) || {
     challengeStarted: false,
     userName: 'GUEST',
+    daw: 'any',
+    genre: 'any',
     startDate: null,
     completedTasks: {},
-    currentChallengeId: 1,
+    filteredChallengeIds: [],
+    currentChallengeIndex: 0,
     lastCompletionTime: 0,
     currentStreak: 0,
     missesRemaining: 1,
@@ -174,6 +177,12 @@ let state = JSON.parse(localStorage.getItem('challengeState')) || {
 };
 
 let timerInterval;
+
+// Helper to get current challenge ID based on filtered list
+function getCurrentChallengeId() {
+    if (!state.filteredChallengeIds || state.filteredChallengeIds.length === 0) return null;
+    return state.filteredChallengeIds[state.currentChallengeIndex];
+}
 
 function saveState() {
     localStorage.setItem('challengeState', JSON.stringify(state));
@@ -184,26 +193,7 @@ function getChallengeById(id) {
 }
 
 // --- Theme Logic ---
-function initTheme() {
-    const currentTheme = state.theme || 'light';
-    document.documentElement.setAttribute('data-theme', currentTheme);
-    if (currentTheme === 'dark') {
-        if (themeCheckbox) themeCheckbox.checked = true;
-    }
-}
-
-if (themeCheckbox) {
-    themeCheckbox.addEventListener('change', (e) => {
-        if (e.target.checked) {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            state.theme = 'dark';
-        } else {
-            document.documentElement.setAttribute('data-theme', 'light');
-            state.theme = 'light';
-        }
-        saveState();
-    });
-}
+// Handled by global.js
 
 // --- Analytics Logic ---
 function updateAnalyticsView() {
@@ -479,7 +469,7 @@ function updateDashboardView() {
         if (analyticsDashboard) analyticsDashboard.style.display = 'none';
     }
     updateProgress();
-    initTheme();
+    // initTheme();
 }
 
 // Mobile Nav Elements
@@ -529,7 +519,7 @@ if (mobileNavTasksBtn) {
 // --- INITIALIZATION ---
 async function initApp() {
     // 1. Initialize Theme
-    initTheme();
+    // initTheme();
 
     // 2. Try to fetch external data, fallback if it fails (likely due to CORS/file://)
     try {
@@ -563,8 +553,10 @@ if (navAnalyticsBtn) {
 // --- EVENT HANDLERS ---
 if (beginChallengeBtn) {
     beginChallengeBtn.addEventListener('click', () => {
-        if (startDateInput) startDateInput.value = new Date().toISOString().split('T')[0];
-        if (beginChallengeModal) beginChallengeModal.style.display = 'flex';
+        KratexApp.requireAuth(() => {
+            if (startDateInput) startDateInput.value = new Date().toISOString().split('T')[0];
+            if (beginChallengeModal) beginChallengeModal.style.display = 'flex';
+        });
     });
 }
 

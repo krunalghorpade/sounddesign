@@ -874,3 +874,123 @@ label {
     margin: 0;
     cursor: pointer;
 }
+/* --- Global Modals (Appended via Agent) --- */
+.global-modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(5px);
+    z-index: 9999;
+    display: flex; align-items: center; justify-content: center;
+}
+
+.global-modal-content {
+    background: var(--color-card-bg);
+    width: 90%; max-width: 450px;
+    padding: 30px;
+    border-radius: var(--radius-l);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+    position: relative;
+    border: 1px solid var(--color-border);
+}
+
+.global-modal-close {
+    position: absolute; top: 15px; right: 15px;
+    background: none; border: none;
+    font-size: 24px; color: var(--color-text-muted);
+    cursor: pointer; transition: color 0.2s;
+}
+
+.global-modal-close:hover { color: var(--color-danger); }
+
+.global-input {
+    width: 100%; padding: 12px;
+    background: var(--color-input-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-s);
+    color: var(--color-text-main);
+    margin-top: 5px; box-sizing: border-box;
+    font-family: inherit;
+}
+
+.global-input:focus { border-color: var(--color-primary); outline: none; }
+
+/* Share Icons */
+.share-icons-row {
+    display: flex; justify-content: center;gap: 15px; margin: 20px 0; flex-wrap: wrap;
+}
+
+.share-icon {
+    width: 45px; height: 45px; border-radius: 50%;
+    background: var(--color-bg-secondary);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--color-text-main); font-size: 1.2em; text-decoration: none;
+    transition: 0.2s;
+}
+
+.share-icon:hover {
+    background: var(--color-primary); color: white; transform: translateY(-3px);
+}
+
+.copy-link-box {
+    display: flex; gap: 10px; background: var(--color-input-bg);
+    padding: 5px; border-radius: var(--radius-m);
+    border: 1px solid var(--color-border);
+}
+
+.copy-link-box input {
+    border: none; background: transparent; padding: 10px;
+    flex-grow: 1; font-size: 0.9em;
+    color: var(--color-text-muted); outline: none; width: 100%;
+}
+
+.copy-link-box button {
+    background: var(--color-card-bg); border: 1px solid var(--color-border);
+    padding: 5px 15px; border-radius: var(--radius-s);
+    cursor: pointer; font-weight: 600; color: var(--color-text-main);
+    transition: 0.2s; white-space: nowrap;
+}
+
+.copy-link-box button:hover { border-color: var(--color-primary); color: var(--color-primary); }
+
+/* Icon Button */
+.icon-btn {
+    background: transparent; border: none;
+    color: var(--color-text-muted); font-size: 1.1em;
+    cursor: pointer; width: 40px; height: 40px;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    transition: 0.2s;
+}
+
+.icon-btn:hover {
+    background: var(--color-bg-secondary); color: var(--color-primary); transform: translateY(-2px);
+}
+
+.settings-section .setting-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 15px 0; border-bottom: 1px solid var(--color-border);
+}
+
+.settings-section .setting-item:last-of-type { border-bottom: none; }
+
+/* Toggle Switch (CSS-only) */
+.toggle-wrapper {
+    width: 40px; height: 20px;
+    background: var(--color-border); border-radius: 20px;
+    position: relative; cursor: pointer; transition: 0.3s;
+}
+
+.toggle-knob {
+    width: 16px; height: 16px; background: white;
+    border-radius: 50%; position: absolute;
+    top: 2px; left: 2px; transition: 0.3s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+[data-theme="dark"] .toggle-wrapper { background: var(--color-primary); }
+[data-theme="dark"] .toggle-knob { left: 22px; }
+
+@keyframes scaleIn {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
