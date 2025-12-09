@@ -5,7 +5,8 @@
 
 const KratexApp = {
     // State
-    currentUser: localStorage.getItem('kratex_user'),
+    currentUser: JSON.parse(localStorage.getItem('kratex_current_user')),
+    users: JSON.parse(localStorage.getItem('kratex_users')) || [],
     settings: JSON.parse(localStorage.getItem('kratex_settings')) || { notifications: true, sounds: true },
 
     init: function () {
@@ -63,9 +64,80 @@ const KratexApp = {
         }
     },
 
-    login: function (email) {
-        this.currentUser = email;
-        localStorage.setItem('kratex_user', email);
+    toggleAuthTab: function (tab) {
+        const loginForm = document.getElementById('auth-login-view');
+        const signupForm = document.getElementById('auth-signup-view');
+        const tabBtns = document.querySelectorAll('.auth-tab-btn');
+
+        tabBtns.forEach(btn => btn.classList.remove('active'));
+
+        if (tab === 'login') {
+            if (loginForm) loginForm.style.display = 'block';
+            if (signupForm) signupForm.style.display = 'none';
+            document.getElementById('tab-btn-login').classList.add('active');
+        } else {
+            if (loginForm) loginForm.style.display = 'none';
+            if (signupForm) signupForm.style.display = 'block';
+            document.getElementById('tab-btn-signup').classList.add('active');
+        }
+    },
+
+    registerUser: function (form) {
+        const name = form.name.value.trim();
+        const username = form.username.value.trim().toLowerCase();
+        const password = form.password.value;
+        const confirmPassword = form.confirmPassword.value;
+
+        // Basic Validation
+        if (!name || !username || !password || !confirmPassword) {
+            alert("All fields are required.");
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            alert("Passwords do not match.");
+            return;
+        }
+
+        if (this.users.find(u => u.username === username)) {
+            alert("Username already taken.");
+            return;
+        }
+
+        // Create User
+        const newUser = {
+            id: Date.now().toString(), // Simple ID
+            name: name,
+            username: username,
+            password: password, // In a real app, this MUST be hashed. Storing plain text in localStorage is insecure.
+            joined: new Date().toISOString()
+        };
+
+        // Save to DB
+        this.users.push(newUser);
+        localStorage.setItem('kratex_users', JSON.stringify(this.users));
+
+        // Auto Login
+        this.loginUserInternal(newUser);
+        alert("Account created successfully!");
+    },
+
+    loginUser: function (form) {
+        const username = form.username.value.trim().toLowerCase();
+        const password = form.password.value;
+
+        const user = this.users.find(u => u.username === username && u.password === password);
+
+        if (user) {
+            this.loginUserInternal(user);
+        } else {
+            alert("Invalid username or password.");
+        }
+    },
+
+    loginUserInternal: function (user) {
+        this.currentUser = user;
+        localStorage.setItem('kratex_current_user', JSON.stringify(user));
         this.closeModal('auth-modal');
         this.updateUIForAuth();
 
@@ -73,14 +145,11 @@ const KratexApp = {
             this.pendingAction();
             this.pendingAction = null;
         }
-
-        // Show success toast
-        alert(`Welcome back, ${email}!`);
     },
 
     logout: function () {
         this.currentUser = null;
-        localStorage.removeItem('kratex_user');
+        localStorage.removeItem('kratex_current_user');
         this.updateUIForAuth();
         location.reload();
     },
@@ -91,7 +160,9 @@ const KratexApp = {
         const authTrigger = document.getElementById('nav-auth-trigger');
 
         if (this.currentUser) {
-            if (settingsUser) settingsUser.textContent = this.currentUser;
+            // Display set name or username
+            const displayName = this.currentUser.name || this.currentUser.username;
+            if (settingsUser) settingsUser.textContent = displayName;
             if (authTrigger) {
                 authTrigger.innerHTML = '<i class="fas fa-user-circle"></i>';
                 authTrigger.onclick = () => this.openModal('settings-modal');
@@ -175,19 +246,56 @@ const KratexApp = {
         const modalHTML = `
             <!-- Auth Modal -->
             <div id="auth-modal" class="global-modal-overlay" style="display: none;">
-                <div class="global-modal-content">
+                <div class="global-modal-content" style="max-width: 400px;">
                     <button class="global-modal-close" onclick="KratexApp.closeModal('auth-modal')">&times;</button>
-                    <h2 class="text-gradient">Welcome to Kratex</h2>
-                    <p style="color: var(--color-text-muted); margin-bottom: 20px;">One account for all sound design tools.</p>
-                    <form id="global-login-form" onsubmit="event.preventDefault(); KratexApp.login(this.email.value);">
-                        <div class="input-group">
-                            <label>Email Address</label>
-                            <input type="email" name="email" required placeholder="you@example.com" class="global-input">
-                        </div>
-                        <button type="submit" class="btn-primary" style="width: 100%; margin-top: 20px;">Access Tools</button>
-                    </form>
+                    
+                    <div style="display: flex; gap: 20px; border-bottom: 1px solid var(--color-border); margin-bottom: 20px; padding-bottom: 10px;">
+                        <span id="tab-btn-login" class="auth-tab-btn active" onclick="KratexApp.toggleAuthTab('login')" style="cursor: pointer; font-weight: 700; color: var(--color-text-main);">Login</span>
+                        <span id="tab-btn-signup" class="auth-tab-btn" onclick="KratexApp.toggleAuthTab('signup')" style="cursor: pointer; font-weight: 600; color: var(--color-text-muted);">Sign Up</span>
+                    </div>
+
+                    <!-- Login View -->
+                    <div id="auth-login-view">
+                        <h2 class="text-gradient">Welcome Back</h2>
+                        <form onsubmit="event.preventDefault(); KratexApp.loginUser(this);">
+                            <div class="input-group">
+                                <label>Username</label>
+                                <input type="text" name="username" required placeholder="Producer123" class="global-input">
+                            </div>
+                            <div class="input-group">
+                                <label>Password</label>
+                                <input type="password" name="password" required placeholder="••••••••" class="global-input">
+                            </div>
+                            <button type="submit" class="btn-primary" style="width: 100%; margin-top: 20px;">Login</button>
+                        </form>
+                    </div>
+
+                    <!-- Signup View -->
+                    <div id="auth-signup-view" style="display: none;">
+                        <h2 class="text-gradient">Join Kratex</h2>
+                        <form onsubmit="event.preventDefault(); KratexApp.registerUser(this);">
+                            <div class="input-group">
+                                <label>Full Name</label>
+                                <input type="text" name="name" required placeholder="John Doe" class="global-input">
+                            </div>
+                            <div class="input-group">
+                                <label>Username <span style="font-size: 0.8em; color: var(--color-text-muted);">(Unique)</span></label>
+                                <input type="text" name="username" required placeholder="prod_master" class="global-input">
+                            </div>
+                            <div class="input-group">
+                                <label>Password</label>
+                                <input type="password" name="password" required placeholder="••••••••" class="global-input">
+                            </div>
+                            <div class="input-group">
+                                <label>Confirm Password</label>
+                                <input type="password" name="confirmPassword" required placeholder="••••••••" class="global-input">
+                            </div>
+                            <button type="submit" class="btn-primary" style="width: 100%; margin-top: 20px;">Create Account</button>
+                        </form>
+                    </div>
+
                     <p style="font-size: 0.8em; text-align: center; margin-top: 15px; color: var(--color-text-muted);">
-                        Access is free forever. We just need to know who you are.
+                        Access is free forever.
                     </p>
                 </div>
             </div>
@@ -264,6 +372,14 @@ const KratexApp = {
         // We'll trust style.css for main styles, but inject critical modal styles here to ensure they work even if css cache lags or whatever.
         // Actually best to put in CSS file, but for portability...
         // No, let's keep logic and style separate. Styles go to CSS file.
+        // Adding dynamic styles for tabs
+        const style = document.createElement('style');
+        style.textContent = `
+            .auth-tab-btn { opacity: 0.5; transition: opacity 0.2s; border-bottom: 2px solid transparent; padding-bottom: 2px; }
+            .auth-tab-btn.active { opacity: 1; border-bottom-color: var(--color-primary); color: var(--color-primary) !important; }
+            .auth-tab-btn:hover { opacity: 0.8; }
+        `;
+        document.head.appendChild(style);
     }
 };
 
